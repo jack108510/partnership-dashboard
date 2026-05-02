@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PartnerHub — Partnership Decision Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563eb;--blue-light:#60a5fa;--blue-dim:#eff6ff;--blue-border:#dbeafe;--green:#16a34a;--green-dim:#f0fdf4;--amber:#d97706;--amber-dim:#fef3c7;--red:#dc2626;--red-dim:#fef2f2;--navy:#1e3a5f;--muted:#64748b;--bg:#f4f8ff;--white:#fff;--border:#e2e8f0}
+body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.header h1{font-size:1.1rem;font-weight:800}.header h1 span{color:var(--blue)}
+
+.tabs{display:flex;background:var(--white);border-bottom:1px solid var(--border)}
+.tab{flex:1;padding:12px 8px;text-align:center;font-size:.75rem;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .15s;text-transform:uppercase;letter-spacing:.05em}
+.tab.active{color:var(--blue);border-bottom:3px solid var(--blue);background:var(--blue-dim)}
+
+.content{flex:1;padding:16px;overflow-y:auto}
+
+/* Cards */
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;transition:all .15s}
+.card:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(37,99,235,.06)}
+.card-row{display:flex;justify-content:space-between;align-items:center}
+.card-title{font-size:.95rem;font-weight:800;color:var(--navy)}
+.card-sub{font-size:.75rem;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.badge-green{background:var(--green-dim);color:var(--green)}
+.badge-amber{background:var(--amber-dim);color:var(--amber)}
+.badge-red{background:var(--red-dim);color:var(--red)}
+.badge-blue{background:var(--blue-dim);color:var(--blue)}
+
+/* Metric Row */
+.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.metric{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center}
+.metric-val{font-size:1.3rem;font-weight:900;color:var(--blue)}
+.metric-lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+
+/* Progress Bar */
+.progress{height:8px;background:var(--border);border-radius:4px;margin-top:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+
+/* Decision Card */
+.decision{display:flex;gap:8px;margin-top:12px}
+.decision-btn{flex:1;padding:10px;border-radius:10px;font-size:.8rem;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.decision-approve{background:var(--green-dim);color:var(--green)}.decision-approve:hover{background:var(--green);color:#fff}
+.decision-reject{background:var(--red-dim);color:var(--red)}.decision-reject:hover{background:var(--red);color:#fff}
+.decision-review{background:var(--amber-dim);color:var(--amber)}.decision-review:hover{background:var(--amber);color:#fff}
+
+/* Section Header */
+.section-hdr{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:16px 0 8px}
+.section-hdr:first-child{margin-top:0}
+
+/* Add FAB */
+.fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:28px;cursor:pointer;box-shadow:0 4px 16px rgba(37,99,235,.3);z-index:10}
+
+/* Modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:flex-end}
+.modal-overlay.sh{display:flex}
+.modal{background:var(--white);border-radius:20px 20px 0 0;width:100%;max-width:480px;padding:24px;max-height:85vh;overflow-y:auto}
+.modal-handle{width:40px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 16px}
+.modal h2{font-size:1.1rem;font-weight:900;margin-bottom:16px}
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
+.form-input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:.88rem;outline:none;font-family:inherit}
+.form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-row{display:flex;gap:10px;margin-top:16px}
+.btn{padding:12px;border-radius:10px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;flex:1;text-align:center}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:#1d4ed8}
+.btn-ghost{background:none;color:var(--muted);border:1px solid var(--border)}
+
+/* Empty */
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.empty p{font-size:.85rem}
+
+@media(min-width:481px){.app{border-left:1px solid var(--border);border-right:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const SAVE_KEY='partnerhub_data';
+let state={
+  partners:[],
+  proposals:[],
+  activeTab:'overview',
+  view:'list'
+};
+
+function load(){const d=localStorage.getItem(SAVE_KEY);if(d)state=JSON.parse(d)}
+function save(){localStorage.setItem(SAVE_KEY,JSON.stringify(state))}
+function $(id){return document.getElementById(id)}
+
+function render(){
+  const app=$('app');
+  const tabs=['overview','proposals','partners','messages'];
+  app.innerHTML=`
+    <div class="header">
+      <h1>Partner<span>Hub</span></h1>
+      <button class="btn btn-ghost" style="padding:6px 12px;font-size:.75rem" onclick="resetData()">Reset</button>
+    </div>
+    <div class="tabs">
+      <button class="tab ${state.activeTab==='overview'?'active':''}" onclick="setTab('overview')">Overview</button>
+      <button class="tab ${state.activeTab==='proposals'?'active':''}" onclick="setTab('proposals')">Proposals</button>
+      <button class="tab ${state.activeTab==='partners'?'active':''}" onclick="setTab('partners')">Partners</button>
+      <button class="tab ${state.activeTab==='messages'?'active':''}" onclick="setTab('messages')">Messages</button>
+    </div>
+    <div class="content" id="content"></div>
+    <button class="fab" onclick="showAdd()">+</button>
+  `;
+  const c=$('content');
+  if(state.activeTab==='overview')renderOverview(c);
+  else if(state.activeTab==='proposals')renderProposals(c);
+  else if(state.activeTab==='partners')renderPartners(c);
+  else if(state.activeTab==='messages')renderMessages(c);
+}
+
+function renderOverview(c){
+  const approved=state.proposals.filter(p=>p.status==='approved').length;
+  const pending=state.proposals.filter(p=>p.status==='pending').length;
+  const rejected=state.proposals.filter(p=>p.status==='rejected').length;
+  const total=state.proposals.length;
+  const totalValue=state.proposals.filter(p=>p.status==='approved').reduce((s,p)=>s+(p.value||0),0);
+
+  c.innerHTML=`
+    <div class="metrics">
+      <div class="metric"><div class="metric-val">${state.partners.length}</div><div class="metric-lbl">Partners</div></div>
+      <div class="metric"><div class="metric-val">${approved}</div><div class="metric-lbl">Approved</div></div>
+      <div class="metric"><div class="metric-val">${pending}</div><div class="metric-lbl">Pending</div></div>
+    </div>
+    ${total?`
+    <div class="card">
+      <div class="card-title">Decision Pipeline</div>
+      <div class="progress" style="margin-top:12px">
+        <div class="progress-fill" style="width:${total?approved/total*100:0}%;background:var(--green)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:.7rem;color:var(--muted)">
+        <span>${approved} approved</span><span>${pending} pending</span><span>${rejected} rejected</span>
+      </div>
+    </div>`:``}
+    ${state.proposals.filter(p=>p.status==='pending').length?`<div class="section-hdr">Needs Decision</div>`:''}
+    ${state.proposals.filter(p=>p.status==='pending').map(p=>`
+      <div class="card">
+        <div class="card-row">
+          <div><div class="card-title">${p.title}</div><div class="card-sub">${p.partner||'Unassigned'} · ${p.category||'General'}</div></div>
+          <span class="badge badge-amber">Pending</span>
+        </div>
+        ${p.description?`<div style="font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.4">${p.description}</div>`:''}
+        <div class="decision">
+          <button class="decision-btn decision-approve" onclick="setStatus('${p.id}','approved')">Approve</button>
+          <button class="decision-btn decision-review" onclick="setStatus('${p.id}','review')">Review</button>
+          <button class="decision-btn decision-reject" onclick="setStatus('${p.id}','rejected')">Reject</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function renderProposals(c){
+  const statuses=['pending','approved','review','rejected'];
+  c.innerHTML=state.proposals.length?statuses.map(s=>{
+    const items=state.proposals.filter(p=>p.status===s);
+    if(!items.length)return'';
+    const badgeClass={'pending':'badge-amber','approved':'badge-green','review':'badge-blue','rejected':'badge-red'}[s];
+    return`<div class="section-hdr">${s.charAt(0).toUpperCase()+s.slice(1)} (${items.length})</div>`+
+    items.map(p=>`<div class="card" onclick="viewProposal('${p.id}')"><div class="card-row"><div><div class="card-title">${p.title}</div><div class="card-sub">${p.partner||'Unassigned'} · ${p.category||''}</div></div><span class="badge ${badgeClass}">${s}</span></div></div>`).join('');
+  }).join(''):'<div class="empty"><h3>No proposals yet</h3><p>Tap + to create one</p></div>';
+}
+
+function renderPartners(c){
+  c.innerHTML=state.partners.length?state.partners.map((p,i)=>`
+    <div class="card">
+      <div class="card-row">
+        <div>
+          <div class="card-title">${p.name}</div>
+          <div class="card-sub">${p.role||'Partner'} · ${p.email||''}</div>
+        </div>
+        <button class="btn btn-ghost" style="padding:6px 10px;font-size:.7rem" onclick="deletePartner(${i})">Remove</button>
+      </div>
+    </div>
+  `).join(''):'<div class="empty"><h3>No partners yet</h3><p>Tap + to add one</p></div>';
+}
+
+function renderMessages(c){
+  c.innerHTML='<div class="empty"><h3>Messages</h3><p>Partner communication coming soon</p></div>';
+}
+
+function setTab(t){state.activeTab=t;render()}
+
+function showAdd(){
+  const type=state.activeTab==='partners'?'partner':'proposal';
+  const overlay=document.createElement('div');
+  overlay.className='modal-overlay sh';
+  overlay.id='modal';
+  overlay.innerHTML=`<div class="modal">
+    <div class="modal-handle"></div>
+    <h2>${type==='partner'?'Add Partner':'New Proposal'}</h2>
+    ${type==='partner'?`
+      <div class="form-group"><label class="form-label">Name</label><input class="form-input" id="m-name" placeholder="John Smith"/></div>
+      <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="m-role" placeholder="Co-founder"/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="m-email" placeholder="john@example.com"/></div>
+    `:`
+      <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="m-title" placeholder="Revenue split proposal"/></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Category</label><select class="form-input" id="m-cat"><option>Financial</option><option>Operations</option><option>Strategy</option><option>Legal</option><option>Other</option></select></div>
+        <div class="form-group"><label class="form-label">Value ($)</label><input class="form-input" id="m-val" type="number" placeholder="0"/></div>
+      </div>
+      <div class="form-group"><label class="form-label">Assigned Partner</label><select class="form-input" id="m-partner"><option value="">Unassigned</option>${state.partners.map(p=>`<option>${p.name}</option>`).join('')}</select></div>
+      <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" id="m-desc" rows="3" placeholder="What's the proposal?"></textarea></div>
+      <div class="form-group"><label class="form-label">Cost to Implement</label><input class="form-input" id="m-cost" type="number" placeholder="0"/></div>
+    `}
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveNew('${type}')">Save</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+}
+
+function closeModal(){const m=$('modal');if(m)m.remove()}
+
+function saveNew(type){
+  if(type==='partner'){
+    const name=$('m-name').value.trim();
+    if(!name)return;
+    state.partners.push({name,role:$('m-role').value.trim(),email:$('m-email').value.trim()});
+  }else{
+    const title=$('m-title').value.trim();
+    if(!title)return;
+    state.proposals.push({
+      id:'p'+Date.now(),title,
+      category:$('m-cat').value,
+      value:parseFloat($('m-val').value)||0,
+      partner:$('m-partner').value,
+      description:$('m-desc').value.trim(),
+      cost:parseFloat($('m-cost').value)||0,
+      status:'pending',
+      date:new Date().toLocaleDateString('en-CA')
+    });
+  }
+  save();closeModal();render();
+}
+
+function setStatus(id,status){
+  const p=state.proposals.find(x=>x.id===id);
+  if(p){p.status=status;save();render()}
+}
+
+function deletePartner(i){if(confirm('Remove this partner?')){state.partners.splice(i,1);save();render()}}
+function resetData(){if(confirm('Clear all data?')){state={partners:[],proposals:[],activeTab:'overview',view:'list'};save();render()}}
+
+load();render();
+</script>
+</body>
+</html>
