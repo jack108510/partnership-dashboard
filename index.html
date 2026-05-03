@@ -13,7 +13,6 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 
 .header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:10}
 .header h1{font-size:1.1rem;font-weight:800}.header h1 span{color:var(--blue)}
-.header p{font-size:.72rem;color:var(--muted);margin-top:2px}
 
 .tabs{display:flex;background:var(--white);border-bottom:1px solid var(--border)}
 .tab{flex:1;padding:12px 6px;text-align:center;font-size:.68rem;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .15s;text-transform:uppercase;letter-spacing:.04em}
@@ -22,53 +21,62 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 .content{flex:1;padding:16px;overflow-y:auto}
 .page{display:none}.page.active{display:block}
 
-/* Metrics */
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.metric{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px}
-.metric .label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-.metric .value{font-size:1.4rem;font-weight:900;color:var(--blue)}
-.metric .sub{font-size:.68rem;color:var(--muted);margin-top:2px}
+/* Role toggle */
+.role-bar{display:flex;gap:8px;margin-bottom:16px}
+.role-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;color:var(--navy)}
+.role-btn.active{border-color:var(--blue);background:var(--blue-dim);color:var(--blue)}
 
-/* Cards */
-.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.card-title{font-size:.9rem;font-weight:800}
-.badge{display:inline-block;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
-.badge-green{background:var(--green-dim);color:var(--green)}
-.badge-amber{background:var(--amber-dim);color:var(--amber)}
-.badge-red{background:var(--red-dim);color:var(--red)}
-.badge-blue{background:var(--blue-dim);color:var(--blue)}
+/* Proposal cards */
+.proposal{background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.prop-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border)}
+.prop-title{font-size:.9rem;font-weight:800}
+.prop-date{font-size:.68rem;color:var(--muted);margin-top:2px}
+.status{font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+.s-pending{background:var(--amber-dim);color:var(--amber)}
+.s-approved{background:var(--green-dim);color:var(--green)}
+.s-rejected{background:var(--red-dim);color:var(--red)}
 
-.section-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.prop-body{padding:14px 16px}
+.prop-meta{font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.prop-detail{font-size:.75rem;color:var(--navy);line-height:1.55;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:12px}
 
-/* Campaign rows */
-.camp{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.camp:last-child{border:none}
-.camp-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
-.camp-info{flex:1;min-width:0}
-.camp-name{font-size:.82rem;font-weight:700}
-.camp-meta{font-size:.68rem;color:var(--muted);margin-top:1px}
-.camp-val{font-size:.85rem;font-weight:900;color:var(--green);flex-shrink:0;text-align:right}
+/* Items inside proposals */
+.items{margin-bottom:12px}
+.item-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.item-row:last-child{border:none}
+.item-label{color:var(--muted)}
+.item-val{font-weight:700}
 
-/* Alert rows */
-.alert{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.alert:last-child{border:none}
-.alert-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
-.alert-info{flex:1}
-.alert-title{font-size:.82rem;font-weight:700}
-.alert-desc{font-size:.68rem;color:var(--muted);margin-top:1px;line-height:1.4}
+/* Response area */
+.response{padding:14px 16px;border-top:1px solid var(--border)}
+.resp-text{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-family:inherit;resize:vertical;min-height:60px;margin-bottom:8px;outline:none}
+.resp-text:focus{border-color:var(--blue)}
+.resp-btns{display:flex;gap:8px}
+.rbtn{flex:1;padding:10px;border:none;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer}
+.rbtn-approve{background:var(--green-dim);color:var(--green)}
+.rbtn-reject{background:var(--red-dim);color:var(--red)}
 
-/* Progress bar */
-.bar{height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:6px}
-.bar-fill{height:100%;border-radius:6px;transition:width .5s ease}
+/* Rejection reason shown */
+.reason{padding:12px 16px;margin:0;border-top:1px solid var(--border)}
+.reason-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin-bottom:4px}
+.reason-text{font-size:.8rem;color:var(--muted);line-height:1.5}
+.approve-note{padding:12px 16px;border-top:1px solid var(--border)}
+.approve-note .reason-label{color:var(--green)}
 
-/* Action buttons */
-.btn{display:inline-block;padding:8px 16px;border-radius:8px;font-size:.78rem;font-weight:700;border:none;cursor:pointer;transition:all .15s}
-.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1d4ed8}
-.btn-ghost{background:var(--white);color:var(--blue);border:1px solid var(--border)}
-.actions{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+/* New proposal form */
+.form{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.form h3{font-size:.95rem;font-weight:800;margin-bottom:14px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:.84rem;font-family:inherit;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--blue)}
+.submit{width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
+.submit:hover{background:#1d4ed8}
 
-@media(max-width:400px){.metrics{grid-template-columns:1fr 1fr}.tab{font-size:.62rem;padding:10px 4px}}
+.section{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
+.empty{text-align:center;color:var(--muted);padding:32px;font-size:.85rem}
+
+@media(max-width:400px){.tab{font-size:.62rem;padding:10px 4px}}
 </style>
 </head>
 <body>
@@ -76,7 +84,6 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 
 <div class="header">
   <h1>Vet <span>INC</span></h1>
-  <p>Partner Dashboard</p>
 </div>
 
 <div class="tabs">
@@ -88,107 +95,187 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 
 <!-- ALL LOCATIONS -->
 <div class="content page active" id="pg-all">
-  <div class="metrics">
-    <div class="metric"><div class="label">Total Clinics</div><div class="value">3</div><div class="sub">across all territories</div></div>
-    <div class="metric"><div class="label">Total Revenue</div><div class="value">$4,200</div><div class="sub">recovered this month</div></div>
-    <div class="metric"><div class="label">Active Campaigns</div><div class="value">9</div><div class="sub">3 per clinic</div></div>
-    <div class="metric"><div class="label">Alerts</div><div class="value" style="color:var(--amber)">7</div><div class="sub">flagged items</div></div>
+  <div class="role-bar">
+    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
-
-  <div class="section-label">Clinic Performance</div>
-  <div class="card">
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">RG</div><div class="camp-info"><div class="camp-name">Rosslyn Veterinary</div><div class="camp-meta">3 campaigns active · $1,864/mo recovered</div></div><div class="camp-val">$1,864</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--blue-dim);color:var(--blue)">TG</div><div class="camp-info"><div class="camp-name">Tudor Glen Veterinary</div><div class="camp-meta">3 campaigns active · $1,450/mo recovered</div></div><div class="camp-val">$1,450</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--amber-dim);color:var(--amber)">RV</div><div class="camp-info"><div class="camp-name">River Valley Veterinary</div><div class="camp-meta">3 campaigns active · $886/mo recovered</div></div><div class="camp-val">$886</div></div>
-  </div>
-
-  <div class="section-label">Cross-Clinic Alerts</div>
-  <div class="card">
-    <div class="alert"><div class="alert-icon" style="background:var(--red-dim);color:var(--red)">!</div><div class="alert-info"><div class="alert-title">Rabies vaccine — all 3 clinics</div><div class="alert-desc">Price unchanged 5+ years across all locations. CPI suggests +$2.40.</div></div></div>
-    <div class="alert"><div class="alert-icon" style="background:var(--amber-dim);color:var(--amber)">.99</div><div class="alert-info"><div class="alert-title">47+ codes per clinic non-.99</div><div class="alert-desc">Average $0.51/transaction lost. $3,200+/yr per clinic recoverable.</div></div></div>
-    <div class="alert"><div class="alert-icon" style="background:var(--blue-dim);color:var(--blue)">📈</div><div class="alert-info"><div class="alert-title">Lab supplies up 28%</div><div class="alert-desc">Trending above 6-month average at Rosslyn. Check Tudor Glen & River Valley.</div></div></div>
+  <div id="all-list"></div>
+  <div class="form">
+    <h3>New Suggestion</h3>
+    <div class="field"><label>Clinic</label><select id="f-clinic"><option value="all">All Clinics</option><option value="tudor">Tudor Glen</option><option value="river">River Valley</option><option value="rosslyn">Rosslyn</option></select></div>
+    <div class="field"><label>Title</label><input id="f-title" placeholder="e.g. Rabies vaccine price increase"/></div>
+    <div class="field"><label>Category</label><select id="f-cat"><option value="pricing">Pricing</option><option value="campaign">Campaign</option><option value="service">New Service</option><option value="expense">Expense</option><option value="marketing">Marketing</option></select></div>
+    <div class="field"><label>Details</label><textarea id="f-detail" placeholder="What's the suggestion, why, and expected impact..."></textarea></div>
+    <div class="field"><label>Expected Impact</label><input id="f-impact" placeholder="e.g. +$864/yr revenue"/></div>
+    <button class="submit" onclick="addProposal('all')">Submit Suggestion</button>
   </div>
 </div>
 
 <!-- TUDOR GLEN -->
 <div class="content page" id="pg-tudor">
-  <div class="metrics">
-    <div class="metric"><div class="label">Monthly Recovered</div><div class="value">$1,450</div></div>
-    <div class="metric"><div class="label">Flagged Items</div><div class="value" style="color:var(--amber)">12</div></div>
+  <div class="role-bar">
+    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
-
-  <div class="section-label">Campaigns</div>
-  <div class="card">
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">$</div><div class="camp-info"><div class="camp-name">Inflation Adjuster</div><div class="camp-meta">8 services below CPI</div></div><div class="camp-val">$640/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">.99</div><div class="camp-info"><div class="camp-name">.99 Pricing Recovery</div><div class="camp-meta">52 codes flagged</div></div><div class="camp-val">$580/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">%</div><div class="camp-info"><div class="camp-name">Micro Margin Stack</div><div class="camp-meta">9 supplier increases</div></div><div class="camp-val">$230/mo</div></div>
-  </div>
-
-  <div class="section-label">Alerts</div>
-  <div class="card">
-    <div class="alert"><div class="alert-icon" style="background:var(--red-dim);color:var(--red)">!</div><div class="alert-info"><div class="alert-title">Wellness exam — $68 since 2021</div><div class="alert-desc">CPI suggests $74. Recovery: $480/mo</div></div></div>
-    <div class="alert"><div class="alert-icon" style="background:var(--amber-dim);color:var(--amber)">.99</div><div class="alert-info"><div class="alert-title">52 non-.99 codes</div><div class="alert-desc">Largest gap: dental cleaning at $180 instead of $179.99</div></div></div>
+  <div id="tudor-list"></div>
+  <div class="form">
+    <h3>New Suggestion</h3>
+    <div class="field"><label>Title</label><input id="t-title" placeholder="e.g. Wellness exam repricing"/></div>
+    <div class="field"><label>Category</label><select id="t-cat"><option value="pricing">Pricing</option><option value="campaign">Campaign</option><option value="service">New Service</option><option value="expense">Expense</option></select></div>
+    <div class="field"><label>Details</label><textarea id="t-detail" placeholder="What and why..."></textarea></div>
+    <div class="field"><label>Expected Impact</label><input id="t-impact" placeholder="e.g. +$480/mo"/></div>
+    <button class="submit" onclick="addProposal('tudor')">Submit Suggestion</button>
   </div>
 </div>
 
 <!-- RIVER VALLEY -->
 <div class="content page" id="pg-river">
-  <div class="metrics">
-    <div class="metric"><div class="label">Monthly Recovered</div><div class="value">$886</div></div>
-    <div class="metric"><div class="label">Flagged Items</div><div class="value" style="color:var(--amber)">9</div></div>
+  <div class="role-bar">
+    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
-
-  <div class="section-label">Campaigns</div>
-  <div class="card">
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">$</div><div class="camp-info"><div class="camp-name">Inflation Adjuster</div><div class="camp-meta">5 services below CPI</div></div><div class="camp-val">$320/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">.99</div><div class="camp-info"><div class="camp-name">.99 Pricing Recovery</div><div class="camp-meta">38 codes flagged</div></div><div class="camp-val">$410/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">%</div><div class="camp-info"><div class="camp-name">Micro Margin Stack</div><div class="camp-meta">7 supplier increases</div></div><div class="camp-val">$156/mo</div></div>
-  </div>
-
-  <div class="section-label">Alerts</div>
-  <div class="card">
-    <div class="alert"><div class="alert-icon" style="background:var(--amber-dim);color:var(--amber)">!</div><div class="alert-info"><div class="alert-title">Spay/neuter pricing below market</div><div class="alert-desc">Charging $180, regional avg $220. Potential $40/procedure increase.</div></div></div>
-    <div class="alert"><div class="alert-icon" style="background:var(--blue-dim);color:var(--blue)">📊</div><div class="alert-info"><div class="alert-title">New clinic competitor detected</div><div class="alert-desc">Companion Vet opened 2km away. Consider Exam Drop Initiative.</div></div></div>
+  <div id="river-list"></div>
+  <div class="form">
+    <h3>New Suggestion</h3>
+    <div class="field"><label>Title</label><input id="r-title" placeholder="e.g. Spay/neuter repricing"/></div>
+    <div class="field"><label>Category</label><select id="r-cat"><option value="pricing">Pricing</option><option value="campaign">Campaign</option><option value="service">New Service</option><option value="expense">Expense</option></select></div>
+    <div class="field"><label>Details</label><textarea id="r-detail" placeholder="What and why..."></textarea></div>
+    <div class="field"><label>Expected Impact</label><input id="r-impact" placeholder="e.g. +$320/mo"/></div>
+    <button class="submit" onclick="addProposal('river')">Submit Suggestion</button>
   </div>
 </div>
 
 <!-- ROSSLYN -->
 <div class="content page" id="pg-rosslyn">
-  <div class="metrics">
-    <div class="metric"><div class="label">Monthly Recovered</div><div class="value">$1,864</div></div>
-    <div class="metric"><div class="label">Flagged Items</div><div class="value" style="color:var(--green)">4</div></div>
+  <div class="role-bar">
+    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
-
-  <div class="section-label">Campaigns</div>
-  <div class="card">
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">$</div><div class="camp-info"><div class="camp-name">Inflation Adjuster</div><div class="camp-meta">Rabies +$2.40, 3 others flagged</div></div><div class="camp-val">$864/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">.99</div><div class="camp-info"><div class="camp-name">.99 Pricing Recovery</div><div class="camp-meta">47 codes flagged</div></div><div class="camp-val">$800/mo</div></div>
-    <div class="camp"><div class="camp-icon" style="background:var(--green-dim);color:var(--green)">%</div><div class="camp-info"><div class="camp-name">Micro Margin Stack</div><div class="camp-meta">12 supplier increases</div></div><div class="camp-val">$200/mo</div></div>
-  </div>
-
-  <div class="section-label">Case Study</div>
-  <div class="card" style="border-left:4px solid var(--blue)">
-    <div style="font-size:.82rem;font-weight:700;margin-bottom:6px">Rosslyn Veterinary Clinic</div>
-    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:10px">"The .99 pricing campaign alone found us $3,200 a year. We had 47 codes that hadn't been touched in over 5 years."</div>
-    <div style="font-size:.72rem;font-weight:700;color:var(--blue)">— Scott, Practice Manager</div>
-  </div>
-
-  <div class="section-label">Alerts</div>
-  <div class="card">
-    <div class="alert"><div class="alert-icon" style="background:var(--red-dim);color:var(--red)">!</div><div class="alert-info"><div class="alert-title">Lab supplies — 28% above average</div><div class="alert-desc">Exceeding 6-month running avg. Possible supplier increase.</div></div></div>
-    <div class="alert"><div class="alert-icon" style="background:var(--green-dim);color:var(--green)">✓</div><div class="alert-info"><div class="alert-title">Rabies vaccine repriced</div><div class="alert-desc">+$2.40 applied. Recovering $864/yr.</div></div></div>
+  <div id="rosslyn-list"></div>
+  <div class="form">
+    <h3>New Suggestion</h3>
+    <div class="field"><label>Title</label><input id="ro-title" placeholder="e.g. Lab supply renegotiation"/></div>
+    <div class="field"><label>Category</label><select id="ro-cat"><option value="pricing">Pricing</option><option value="campaign">Campaign</option><option value="service">New Service</option><option value="expense">Expense</option></select></div>
+    <div class="field"><label>Details</label><textarea id="ro-detail" placeholder="What and why..."></textarea></div>
+    <div class="field"><label>Expected Impact</label><input id="ro-impact" placeholder="e.g. +$200/mo"/></div>
+    <button class="submit" onclick="addProposal('rosslyn')">Submit Suggestion</button>
   </div>
 </div>
 
 </div>
 
 <script>
+let role='vet';
+
+const DB={
+all:[
+{id:1,title:'Inflation Adjuster — All Clinics',cat:'campaign',detail:'Run inflation adjustment across all 3 clinics. 18+ months since last review on most service codes. CPI suggests 3-5% increase is overdue.',impact:'+$4,200/mo combined',status:'approved',by:'vet',note:'Makes sense — let\'s do it.',from:'vet'},
+{id:2,title:'Standardize .99 pricing',cat:'pricing',detail:'47+ codes per clinic don\'t end in .99. Average $0.51/transaction left behind. One-time fix, ongoing revenue.',impact:'+$3,200/yr per clinic',status:'approved',by:'vet',note:'Good catch. Apply to all locations.',from:'vet'},
+{id:3,title:'Micro margin stack on supply increases',cat:'expense',detail:'When supplier costs increase and we update selling price, add 5% margin on top automatically. No manual work.',impact:'+$180/mo per clinic',status:'pending',by:'vet',note:null,from:'vet'},
+{id:4,title:'Exam Drop Initiative — pilot at Rosslyn first',cat:'campaign',detail:'Lower exam fees to attract new clients, recover on high-attachment services. Run 90-day pilot before expanding.',impact:'Net positive from day 1',status:'rejected',by:'vet',note:'Too risky right now. We\'re already busy and can\'t handle a patient surge. Revisit in Q4.',from:'vet'},
+],
+tudor:[
+{id:5,title:'Wellness exam repricing',cat:'pricing',detail:'Currently $68, unchanged since 2021. CPI suggests $74. Regional average is $78. We\'re leaving money on the table and undervaluing the service.',impact:'+$480/mo',status:'pending',by:'vet',note:null,from:'vet'},
+{id:6,title:'Dental cleaning at $179.99 instead of $180',cat:'pricing',detail:'Simple .99 fix. Dental is high-volume (12-15/week). $0.01 × 60/month = trivial but sets pattern.',impact:'$7/mo but establishes standard',status:'approved',by:'vet',note:'Yeah do it, and check all the other codes too.',from:'vet'},
+{id:7,title:'Add online booking widget',cat:'service',detail:'Embed a booking widget on the clinic website. Reduces phone calls by ~30% and captures after-hours bookings. $49/mo SaaS cost.',impact:'Est. 15-20 new bookings/mo',status:'rejected',by:'vet',note:'We don\'t have the staff to handle more bookings right now. The phones are already manageable.',from:'vet'},
+],
+river:[
+{id:8,title:'Spay/neuter repricing',cat:'pricing',detail:'Currently $180, regional average $220. We\'re $40 below market and it\'s our highest-volume surgery. Gradual increase to $200 over 3 months.',impact:'+$320/mo',status:'counter',by:'vet',note:'Can we do $195 instead? $220 feels like too big a jump for our clients. Meet in the middle.',from:'vet'},
+{id:9,title:'Competitor response — keep exam fees',cat:'campaign',detail:'Companion Vet opened 2km away with aggressive new-patient pricing. Recommend maintaining current rates and emphasizing our 15-year reputation. Don\'t race to the bottom.',impact:'Protects existing patient base',status:'approved',by:'vet',note:'Agreed. Our reputation is our advantage. Don\'t compete on price.',from:'vet'},
+{id:10,title:'Lab supply audit',cat:'expense',detail:'Lab supply costs trending 18% above Q4 average. One supplier increased prices quietly. Recommend getting 3 competing quotes this month.',impact:'Potential 15-20% savings',status:'pending',by:'vet',note:null,from:'vet'},
+],
+rosslyn:[
+{id:11,title:'Rabies vaccine +$2.40',cat:'pricing',detail:'18 months since last price change. CPI calculation supports $2.40 increase. Current $22 → $24.40. Still below regional avg of $28.',impact:'+$864/yr',status:'approved',by:'vet',note:'Already applied. Great find.',from:'vet'},
+{id:12,title:'Lab supply renegotiation',cat:'expense',detail:'Lab supplies 28% above 6-month average. Primary supplier raised prices twice in 90 days. Get competing quotes from IDEXX and Antech.',impact:'Potential $150-200/mo savings',status:'pending',by:'vet',note:null,from:'vet'},
+{id:13,title:'Extend Saturday hours',cat:'service',detail:'Currently closed Saturdays after noon. Opening until 4pm would capture weekend walk-ins and urgent care. Need 1 additional tech shift.',impact:'+15-20 appointments/week',status:'rejected',by:'vet',note:'Staff are already stretched thin. Can\'t justify the overtime cost until we hire another tech.',from:'vet'},
+{id:14,title:'Puppy/kitten package pricing',cat:'pricing',detail:'Bundle initial vaccines + deworming + first exam at 15% discount. Builds loyalty and ensures clients return for the full series.',impact:'Higher lifetime value per client',status:'pending',by:'vet',note:null,from:'vet'},
+]
+};
+
 function go(id,el){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('pg-'+id).classList.add('active');
-  el.classList.add('active');
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById('pg-'+id).classList.add('active');
+el.classList.add('active');
+render(id);
 }
+
+function setRole(r,el){
+role=r;
+document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+el.classList.add('active');
+document.querySelectorAll('.tab.active').forEach(t=>{const id=t.textContent.trim().toLowerCase().replace(/\s/g,'');render(id==='all'?'all':id)});
+}
+
+function fmtStatus(s){return{s_pending:'pending',s_approved:'approved',s_rejected:'rejected',s_counter:'counter'}['s_'+s]||s}
+
+function render(loc){
+const proposals=DB[loc]||[];
+const el=document.getElementById(loc+'-list');
+if(!proposals.length){el.innerHTML='<div class="empty">No suggestions yet</div>';return}
+
+el.innerHTML=proposals.map(p=>{
+let html=`<div class="proposal">
+<div class="prop-head"><div><div class="prop-title">${p.title}</div><div class="prop-date">${p.cat} · proposed by ${p.from==='vet'?'Vet INC':'Clinic'}</div></div><span class="status s-${p.status}">${p.status}</span></div>
+<div class="prop-body">
+<div class="prop-detail">${p.detail}</div>
+<div class="item-row"><span class="item-label">Expected Impact</span><span class="item-val">${p.impact}</span></div>`;
+
+// Show rejection reason
+if(p.status==='rejected'&&p.note){
+html+=`<div class="reason"><div class="reason-label">Rejected — Reason</div><div class="reason-text">${p.note}</div></div>`;
+}
+if(p.status==='approved'&&p.note){
+html+=`<div class="approve-note"><div class="reason-label" style="color:var(--green)">Approved</div><div class="reason-text">${p.note}</div></div>`;
+}
+if(p.status==='counter'&&p.note){
+html+=`<div class="reason" style="border-top:1px solid var(--border)"><div class="reason-label" style="color:var(--blue)">Counter-Offer</div><div class="reason-text">${p.note}</div></div>`;
+}
+
+// Show approve/reject buttons for reviewer on pending items
+if(role==='clinic'&&p.status==='pending'){
+html+=`<div class="response">
+<textarea class="resp-text" id="resp-${p.id}" placeholder="Your thoughts... (required for rejection)"></textarea>
+<div class="resp-btns">
+<button class="rbtn rbtn-approve" onclick="respond('${loc}',${p.id},'approved')">✓ Approve</button>
+<button class="rbtn rbtn-reject" onclick="respond('${loc}',${p.id},'rejected')">✕ Reject</button>
+</div></div>`;
+}
+
+html+=`</div></div>`;
+return html;
+}).join('');
+}
+
+function respond(loc,id,action){
+const text=document.getElementById('resp-'+id).value.trim();
+if(action==='rejected'&&!text){alert('Please explain why you\'re rejecting this.');return}
+const p=DB[loc].find(x=>x.id===id);
+p.status=action;
+p.note=text;
+render(loc);
+}
+
+function addProposal(loc){
+const prefixes={all:'f',tudor:'t',river:'r',rosslyn:'ro'};
+const pre=prefixes[loc];
+const title=document.getElementById(pre+'-title').value.trim();
+const detail=document.getElementById(pre+'-detail').value.trim();
+const impact=document.getElementById(pre+'-impact').value.trim();
+const cat=document.getElementById(pre+'-cat').value;
+if(!title||!detail){alert('Title and details required');return}
+
+DB[loc].unshift({id:Date.now(),title,cat,detail,impact:impact||'TBD',status:'pending',by:role,note:null,from:role});
+
+document.getElementById(pre+'-title').value='';
+document.getElementById(pre+'-detail').value='';
+document.getElementById(pre+'-impact').value='';
+
+render(loc);
+}
+
+// Initial render
+render('all');
 </script>
 </body>
 </html>
