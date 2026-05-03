@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vet INC — Partner Dashboard</title>
+<title>Clinic Solutions — Partner Dashboard</title>
 <meta name="theme-color" content="#1e3a5f">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -83,7 +83,7 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 <div class="app">
 
 <div class="header">
-  <h1>Vet <span>INC</span></h1>
+  <h1>Clinic <span>Solutions</span></h1>
 </div>
 
 <div class="tabs">
@@ -96,7 +96,7 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 <!-- ALL LOCATIONS -->
 <div class="content page active" id="pg-all">
   <div class="role-bar">
-    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn active" onclick="setRole('vet',this)">Clinic Solutions (Proposer)</button>
     <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
   <div id="all-list"></div>
@@ -114,7 +114,7 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 <!-- TUDOR GLEN -->
 <div class="content page" id="pg-tudor">
   <div class="role-bar">
-    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn active" onclick="setRole('vet',this)">Clinic Solutions (Proposer)</button>
     <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
   <div id="tudor-list"></div>
@@ -131,7 +131,7 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 <!-- RIVER VALLEY -->
 <div class="content page" id="pg-river">
   <div class="role-bar">
-    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn active" onclick="setRole('vet',this)">Clinic Solutions (Proposer)</button>
     <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
   <div id="river-list"></div>
@@ -148,7 +148,7 @@ body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSy
 <!-- ROSSLYN -->
 <div class="content page" id="pg-rosslyn">
   <div class="role-bar">
-    <button class="role-btn active" onclick="setRole('vet',this)">Vet INC (Proposer)</button>
+    <button class="role-btn active" onclick="setRole('vet',this)">Clinic Solutions (Proposer)</button>
     <button class="role-btn" onclick="setRole('clinic',this)">Clinic (Reviewer)</button>
   </div>
   <div id="rosslyn-list"></div>
@@ -216,7 +216,7 @@ if(!proposals.length){el.innerHTML='<div class="empty">No suggestions yet</div>'
 
 el.innerHTML=proposals.map(p=>{
 let html=`<div class="proposal">
-<div class="prop-head"><div><div class="prop-title">${p.title}</div><div class="prop-date">${p.cat} · proposed by ${p.from==='vet'?'Vet INC':'Clinic'}</div></div><span class="status s-${p.status}">${p.status}</span></div>
+<div class="prop-head"><div><div class="prop-title">${p.title}</div><div class="prop-date">${p.cat} · proposed by ${p.from==='vet'?'Clinic Solutions':'Clinic'}</div></div><span class="status s-${p.status}">${p.status}</span></div>
 <div class="prop-body">
 <div class="prop-detail">${p.detail}</div>
 <div class="item-row"><span class="item-label">Expected Impact</span><span class="item-val">${p.impact}</span></div>`;
